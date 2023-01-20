@@ -10,7 +10,6 @@ images.get('/', logger, async (req, res) => {
     const fileName = req.query.filename;
     const width = req.query.width;
     const height = req.query.height;
-    console.log(fileName);
     if (!fileName || !width || !height) {
       res
         .status(400)
@@ -50,7 +49,6 @@ images.get('/', logger, async (req, res) => {
       const thump = await image.toBuffer();
       image.toFile(thumpFilePath);
       res.set('Content-Type', 'image/jpeg');
-      console.log(fileName);
       res.status(200).send(thump);
     }
   } catch (err) {
