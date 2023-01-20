@@ -4,7 +4,7 @@ const logger = (
   res: express.Response,
   next: Function
 ): void => {
-  console.log(`${req.baseUrl} is visited`);
+  console.log(`image ${req.query.filename} is requested with resolution ${req.query.width} x ${req.query.height}`);
   next();
 };
 
