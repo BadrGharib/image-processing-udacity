@@ -3,6 +3,10 @@ import logger from '../../utils/logger';
 import sharp from 'sharp';
 import path from 'path';
 import { IsfileExists } from '../../utils/helpers';
+import {
+  changeImageresolution,
+  readImageBuffer,
+} from '../../utils/charpIntegration';
 
 const images = express.Router();
 images.get('/', logger, async (req, res) => {
@@ -37,17 +41,17 @@ images.get('/', logger, async (req, res) => {
       );
       const isThumpExist = await IsfileExists(thumpFilePath);
       if (isThumpExist) {
-        const thump = await sharp(thumpFilePath).toBuffer();
+        const thump = await readImageBuffer(thumpFilePath);
         res.set('Content-Type', 'image/jpeg');
         res.status(200).send(thump);
         return;
       }
-      const image = await sharp(filePath).resize(
+      const thump = await changeImageresolution(
+        filePath,
+        thumpFilePath,
         parseInt(width as string),
         parseInt(height as string)
       );
-      const thump = await image.toBuffer();
-      image.toFile(thumpFilePath);
       res.set('Content-Type', 'image/jpeg');
       res.status(200).send(thump);
     }
