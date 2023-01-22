@@ -10,7 +10,7 @@
     "build": "npx tsc && npm run copy-assets",
     "jasmine": "jasmine",
     "test": "npm run build && npm run jasmine",
-    "copy-assets": "cp -rv src/assets build/assets/"
+    "copy-assets": "cp -rv src/assets build/"
   },
   "author": "udacity",
   "license": "ISC",
